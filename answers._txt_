@@ -1,0 +1,59 @@
+Answers to PS1
+
+####################
+Part 4 - Results:
+#####################
+    Commands run----------
+python3 script_hits.py -S1 dbs/Dre_query_Hsa_db.txt -S2 dbs/Hsa_query_Dre_db.txt -B1 /projects/bgmp/shared/Bi623/PS1/biomart/dre_114_biomart.tsv -B2 /projects/bgmp/shared/Bi623/PS1/biomart/hsa_114_biomart.tsv -o RBH_results/Human_Zebrafish_RBH.tsv
+python3 script_hits.py -S1 dbs/Hsa_query_Eel_db.txt -S2 dbs/Eel_query_Hsa_db.txt -B1 /projects/bgmp/shared/Bi623/PS1/biomart/hsa_114_biomart.tsv -B2 /projects/bgmp/shared/Bi623/PS1/biomart/eel_114_biomart.tsv -o RBH_results/Human_ElectricEel_RBH.tsv
+python3 script_hits.py -S1 dbs/Hsa_query_Pka_db.txt -S2 dbs/Pka_query_Hsa_db.txt -B1 /projects/bgmp/shared/Bi623/PS1/biomart/hsa_114_biomart.tsv -B2 /projects/bgmp/shared/Bi623/PS1/biomart/pka_114_biomart.tsv -o RBH_results/Human_ElectricBabyWhale_RBH.tsv
+python3 script_hits.py -S1 dbs/Dre_query_Eel_db.txt -S2 dbs/Eel_query_Dre_db.txt -B1 /projects/bgmp/shared/Bi623/PS1/biomart/dre_114_biomart.tsv -B2 /projects/bgmp/shared/Bi623/PS1/biomart/eel_114_biomart.tsv -o RBH_results/Zebrafish_ElectricEel_RBH.tsv
+python3 script_hits.py -S1 dbs/Dre_query_Pka_db.txt -S2 dbs/Pka_query_Dre_db.txt -B1 /projects/bgmp/shared/Bi623/PS1/biomart/dre_114_biomart.tsv -B2 /projects/bgmp/shared/Bi623/PS1/biomart/pka_114_biomart.tsv -o RBH_results/Zebrafish_ElectricBabyWhale_RBH.tsv
+python3 script_hits.py -S1 dbs/Eel_query_Pka_db.txt -S2 dbs/Pka_query_Eel_db.txt -B1 /projects/bgmp/shared/Bi623/PS1/biomart/eel_114_biomart.tsv -B2 /projects/bgmp/shared/Bi623/PS1/biomart/pka_114_biomart.tsv -o RBH_results/ElectricEel_ElectricBabyWhale_RBH.tsv
+
+    Results of RBH per species pair-----  (with header line)
+RBH_results/Human_Zebrafish_RBH.tsv 7896
+RBH_results/Human_ElectricBabyWhale_RBH.tsv 8945
+RBH_results/Human_ElectricEel_RBH.tsv 8950
+RBH_results/Zebrafish_ElectricBabyWhale_RBH.tsv 9342
+RBH_results/Zebrafish_ElectricEel_RBH.tsv 10186
+RBH_results/ElectricEel_ElectricBabyWhale_RBH.tsv 10663
+
+
+#####################
+Part 5 - Analysis:
+######################
+1. There is a good amount of variation, with almost 3,000 difference between the most RBH and least RBH. I think the 
+RBH results relate to how closely related two species are to eachother in terms of there genes. If two species are relatives of not
+too long ago, they will share more genes then other species. This makes sense as the Human comparisons had the three least RBH.
+
+2. The basic principle of this is to find orhtologs between species, that is species that dont share the most recent common ancestor,
+but share genes. I think this could also be used to find similarities between species to build out a phylogenetic tree, aslthough there are better
+ways to do this. Finding what two species are more commonly related.
+
+3. Its harder to tell what parts are similar, only how similar two species are. For example if i have two species that are 2000 base pairs different from a 3rd species
+I would think those two are similar, from their same difference from the 3rd. But in reality they could even farther apart then they are to humans. Its not great for things like that.
+
+4. While other parts of a gene can change a good amount, the protein sequence is what would be the closest to the same from between species. Its more accurate to compare, 
+but could leave out information that is different from the introns. Introns would make this a lot more difficult to find relations.
+
+
+
+################################### sort command used to grab/updating the db blast input files
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Dre_query_Hsa_db.txt > Dre_query_Hsa_db.txt
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Hsa_query_Dre_db.txt > Hsa_query_Dre_db.txt
+
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Hsa_query_Eel_db.txt > Hsa_query_Eel_db.txt
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Eel_query_Hsa_db.txt > Eel_query_Hsa_db.txt
+
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Hsa_query_Pka_db.txt > Hsa_query_Pka_db.txt
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Pka_query_Hsa_db.txt > Pka_query_Hsa_db.txt
+
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Dre_query_Eel_db.txt > Dre_query_Eel_db.txt
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Eel_query_Dre_db.txt > Eel_query_Dre_db.txt
+
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Dre_query_Pka_db.txt > Dre_query_Pka_db.txt
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Pka_query_Dre_db.txt > Pka_query_Dre_db.txt
+
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Eel_query_Pka_db.txt > Eel_query_Pka_db.txt
+sort -k 11 -g /projects/bgmp/shared/Bi623/PS1/blasthits/Pka_query_Eel_db.txt > Pka_query_Eel_db.txt
